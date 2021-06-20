@@ -30,4 +30,8 @@ app.use("/client", clientsRouter);
 app.use("/product", productsRouter);
 app.use("/sale", salesRouter);
 app.use("/supplier", suppliersRouter);
+app.use((err, req, res, next) => {
+    logger.error(`${req.method} ${req.baseUrl} - ${err.message}`);
+    res.status(400).send({error: err.message});
+})
 app.listen(3030, () => console.log("API Started! 🚀🚀🚀"));
